@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- - Copyright 1999-2011 Alibaba Group. - - Licensed under the Apache License, 
+	Version 2.0 (the "License"); - you may not use this file except in compliance 
+	with the License. - You may obtain a copy of the License at - - http://www.apache.org/licenses/LICENSE-2.0 
+	- - Unless required by applicable law or agreed to in writing, software - 
+	distributed under the License is distributed on an "AS IS" BASIS, - WITHOUT 
+	WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. - See the 
+	License for the specific language governing permissions and - limitations 
+	under the License. -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	
+	xsi:schemaLocation="
+	http://code.alibabatech.com/schema/dubbo 
+	http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-3.2.xsd 
+	http://www.springframework.org/schema/mvc 
+	http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+	http://www.springframework.org/schema/task 
+	http://www.springframework.org/schema/task/spring-task.xsd
+	http://www.springframework.org/schema/cache  
+    http://www.springframework.org/schema/cache/spring-cache-3.2.xsd
+    http://www.springframework.org/schema/util 
+    http://www.springframework.org/schema/util/spring-util.xsd">
+	<context:component-scan base-package="org.gala.demo.dubbox.*" />
+	
+	<dubbo:application name="demo-server" />
+	<dubbo:registry protocol="zookeeper" address="127.0.0.1:2181" />
+	<!-- rest -->
+	<dubbo:protocol name="rest" port="18080" dispatcher="all"
+		threadpool="fixed" threads="400" />
+	<!-- dubbo -->
+	<!-- protocol:缺省dubbo -->
+	<!-- threadpool:fixed 固定大小线程池，启动时建立线程，不关闭，一直持有。(缺省) -->
+	<!-- threads:服务线程池大小(固定大小) -->
+	<!-- port:如果配置为-1 或者 没有配置port，则会分配一个没有被占用的端口。 -->
+	<dubbo:protocol name="dubbo" port="-1" dispatcher="all"
+		threadpool="fixed" threads="4" />
+	<!-- http -->
+	<dubbo:protocol name="http" port="18081" dispatcher="all"
+		threadpool="fixed" threads="400" server="servlet" />
+	<!-- service -->
+	<dubbo:service interface="org.gala.demo.dubbox.service.UserService"
+		ref="userService" version="1.0.0" />
+</beans>
