@@ -33,8 +33,7 @@
 	<dubbo:reference id="dubboUserService"
 		interface="org.gala.demo.dubbox.service.UserService" version="1.0.0"
 		retries="0" timeout="3000" protocol="dubbo" />
-
-	<dubbo:reference id="httpUserService"
-		interface="org.gala.demo.dubbox.service.UserService" version="1.0.0"
-		retries="0" timeout="3000" protocol="http" />
+	<dubbo:reference id="thriftUserService"
+		interface="org.gala.demo.dubbox.service.thrift.UserService2$Iface"
+		retries="0"  timeout="3000"  check="false" async="false" />
 </beans>

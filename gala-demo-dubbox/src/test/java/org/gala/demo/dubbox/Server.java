@@ -13,7 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:spring-dubbo-server.xml")
-public class Server {
+public class Server { 
  
 	@Test
 	public void test() throws IOException {

@@ -9,9 +9,8 @@
 	under the License. -->
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
-	
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+
 	xsi:schemaLocation="
 	http://code.alibabatech.com/schema/dubbo 
 	http://code.alibabatech.com/schema/dubbo/dubbo.xsd
@@ -28,7 +27,7 @@
     http://www.springframework.org/schema/util 
     http://www.springframework.org/schema/util/spring-util.xsd">
 	<context:component-scan base-package="org.gala.demo.dubbox.*" />
-	
+
 	<dubbo:application name="demo-server" />
 	<dubbo:registry protocol="zookeeper" address="127.0.0.1:2181" />
 	<!-- rest -->
@@ -43,8 +42,14 @@
 		threadpool="fixed" threads="4" />
 	<!-- http -->
 	<dubbo:protocol name="http" port="18081" dispatcher="all"
-		threadpool="fixed" threads="400" server="servlet" />
+		threadpool="fixed" threads="400" server="servlet" contextpath="http" />
+	<!-- thrift -->
+	<dubbo:protocol name="thrift" port="18082" />
+
 	<!-- service -->
 	<dubbo:service interface="org.gala.demo.dubbox.service.UserService"
 		ref="userService" version="1.0.0" />
+
+	<dubbo:service interface="org.gala.demo.dubbox.service.thrift.UserService2$Iface"
+		ref="thriftUserService" protocol="thrift" />
 </beans>
