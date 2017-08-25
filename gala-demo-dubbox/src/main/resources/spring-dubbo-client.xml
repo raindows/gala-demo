@@ -35,5 +35,5 @@
 		retries="0" timeout="3000" protocol="dubbo" />
 	<dubbo:reference id="thriftUserService"
 		interface="org.gala.demo.dubbox.service.thrift.UserService2$Iface"
-		retries="0"  timeout="3000"  check="false" async="false" />
+		retries="0"  timeout="3000"/>
 </beans>
